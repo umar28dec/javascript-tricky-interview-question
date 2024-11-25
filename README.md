@@ -233,3 +233,40 @@ In this case, the variable `i` is declared using `let`, which has **block scope*
 As a result, the numbers from 0 to 4 will be logged, each with a respective delay.
 
 </details>
+**Question 9**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+
+setTimeout(function () {
+  console.log("Last:", i);
+}, 2000);
+
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+3
+3
+3
+Last: 3
+
+```
+# Explanation of Code
+
+In the first `setTimeout` loop, the `var i` is used, so the `i` is shared across all the iterations. After the loop finishes, `i` is 3, and all the `setTimeout` functions will refer to the final value of `i`, which is 3.
+
+### How it works:
+- The first three `setTimeout` calls will all print `3`, because they all capture the same reference to `i`, which equals `3` after the loop ends.
+- The second `setTimeout` prints the final value of `i`, which is also `3` since `i` was incremented to `3` by the loop.
+- This happens because `var` has function scope, so the `i` variable is not scoped to each iteration of the loop, and thus all `setTimeout` functions share the same reference to `i`.
+
+As a result, the loop prints `3` multiple times instead of printing `0`, `1`, `2`, and `3` as intended.
+
+
+</details>
