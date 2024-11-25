@@ -47,7 +47,7 @@ undefined
 </details>
 
 
-## Question 10. Predict and Explain the Output of the below JavaScript program. ?.
+**Question 3**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
 for (let i = 0; i < 5; i++) {
@@ -66,8 +66,7 @@ for (let i = 0; i < 5; i++) {
 </details>
 
 
-
-## Question 19. Predict and Explain the Output of the below JavaScript program. ?.
+**Question 4**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
 for (cont i = 0; i < 5; i++) {
