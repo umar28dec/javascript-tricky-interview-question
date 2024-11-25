@@ -205,5 +205,31 @@ printNumbersInOrder();
 
 This ensures the numbers are printed in the desired order with the corresponding delays between each print.
 
+</details>
+
+**Question 8**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  setTimeout(function() { console.log(i); }, i * 1000);
+}
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+0 1 2 3 4
+
+```
+# Explanation of Code
+
+In this case, the variable `i` is declared using `let`, which has **block scope**. This means that a new `i` is created for each iteration of the loop, preserving its value inside the `setTimeout` closure.
+
+### How it works:
+- During each iteration, the `setTimeout` is scheduled to log the current value of `i` after the respective delay (`i * 1000`).
+- Since `let` creates a new scoped variable for each iteration, each `setTimeout` function captures the current value of `i` at that point in time.
+- This ensures that each `setTimeout` prints the correct value of `i` based on its iteration.
+
+As a result, the numbers from 0 to 4 will be logged, each with a respective delay.
 
 </details>
