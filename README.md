@@ -151,8 +151,6 @@ printNumbersInOrder();
 2 (after 3 seconds)
 1 (after 4 seconds)
 ```
-# delayLog and printNumbersInOrder Functions
-
 # Explanation of Code
 
 In the code, `delayLog` is a function that returns a `Promise` which resolves after a specified delay, printing a message when done.
@@ -165,4 +163,3 @@ In the code, `delayLog` is a function that returns a `Promise` which resolves af
 - 1 is printed after a total of 4 seconds.
 
 </details>
-
