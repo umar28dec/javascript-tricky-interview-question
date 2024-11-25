@@ -163,3 +163,47 @@ In the code, `delayLog` is a function that returns a `Promise` which resolves af
 - 1 is printed after a total of 4 seconds.
 
 </details>
+
+**Question 7**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+function delayLog(message, delay, callback) {
+  setTimeout(() => {
+    console.log(message);
+    callback();
+  }, delay);
+}
+
+function printNumbersInOrder() {
+  delayLog(3, 1000, () => {
+    delayLog(2, 2000, () => {
+      delayLog(1, 1000, () => {});
+    });
+  });
+}
+
+printNumbersInOrder();
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+3 (after 1 second)
+2 (after 3 seconds)
+1 (after 4 seconds)
+```
+# Explanation of Code
+
+### `delayLog(message, delay, callback)`
+- Takes a `message`, a `delay`, and a `callback` function.
+- After the specified `delay`, it logs the `message` and calls the `callback` to continue the sequence.
+
+### `printNumbersInOrder()`
+- Calls `delayLog` with the number `3` after a delay of 1 second.
+- When `3` is printed, it triggers the callback to call `delayLog` for `2` after 2 seconds.
+- When `2` is printed, it triggers the callback to call `delayLog` for `1` after a delay of 1 second.
+
+This ensures the numbers are printed in the desired order with the corresponding delays between each print.
+
+
+</details>
