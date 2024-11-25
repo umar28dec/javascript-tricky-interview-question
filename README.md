@@ -1,5 +1,5 @@
 # javascript-tricky-interview-question
-## Question 1. Predict and Explain the Output of the below JavaScript program. ?.
+**Question 1**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
 for (var i = 0; i < 5; i++) {
@@ -18,7 +18,7 @@ for (var i = 0; i < 5; i++) {
 It will print 5, five times because callback schedule with setTimeout function, when callback came back til the time other part of code already got executed so loop fails when i = 5 as i is a global variable, because of that it will print 5
 </details>
 
-## Question 2. Predict and Explain the Output of the below JavaScript program. ?.
+**Question 2**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
 function foo1() {
