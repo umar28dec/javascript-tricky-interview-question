@@ -103,11 +103,9 @@ printNumbersInOrder();
 <details><summary><b>Answer</b></summary>
 
 ```javascript
-5
-5
-5
-5
-5
+1
+2
+3
 ```
 # delayLog and printNumbersInOrder Functions
 
@@ -124,3 +122,47 @@ The `printNumbersInOrder` function is `async`, which means it can use the `await
 The `await` ensures that each `console.log` happens only after the previous `delayLog` has resolved, so the numbers are printed sequentially in the order `1, 2, 3` despite different delays.
 
 </details>
+
+
+**Question 6**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+function delayLog(message, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(message);
+      resolve();
+    }, delay);
+  });
+}
+
+function printNumbersInOrder() {
+  delayLog(3, 1000)
+    .then(() => delayLog(2, 2000))
+    .then(() => delayLog(1, 1000));
+}
+printNumbersInOrder();
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+3 (after 1 second)
+2 (after 3 seconds)
+1 (after 4 seconds)
+```
+# delayLog and printNumbersInOrder Functions
+
+# Explanation of Code
+
+In the code, `delayLog` is a function that returns a `Promise` which resolves after a specified delay, printing a message when done.
+
+`printNumbersInOrder` calls `delayLog` with different delays in sequence. The `.then()` chaining ensures that each log happens after the previous one finishes.
+
+### Example Breakdown:
+- 3 is printed after 1 second.
+- 2 is printed after a total of 3 seconds (1 second for 3, 2 seconds for 2).
+- 1 is printed after a total of 4 seconds.
+
+</details>
+
