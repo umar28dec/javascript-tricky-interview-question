@@ -233,6 +233,7 @@ In this case, the variable `i` is declared using `let`, which has **block scope*
 As a result, the numbers from 0 to 4 will be logged, each with a respective delay.
 
 </details>
+
 **Question 9**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
