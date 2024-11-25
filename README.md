@@ -79,3 +79,48 @@ for (cont i = 0; i < 5; i++) {
 TypeError: Assignment to constant variable.
 ```
 </details>
+
+**Question 5**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+function delayLog(message, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message);
+    }, delay);
+  });
+}
+
+async function printNumbersInOrder() {
+  console.log(await delayLog(1, 1000));
+  console.log(await delayLog(2, 2000));
+  console.log(await delayLog(3, 1000));
+}
+
+printNumbersInOrder();
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+5
+5
+5
+5
+5
+```
+# delayLog and printNumbersInOrder Functions
+
+## Overview
+The `delayLog` function returns a `Promise` that resolves with the given message after a specified delay using `setTimeout`.
+
+The `printNumbersInOrder` function is `async`, which means it can use the `await` keyword to wait for each `Promise` to resolve before proceeding to the next line.
+
+## Sequence
+1. `await delayLog(1, 1000)` - waits 1 second, then prints `1`.
+2. `await delayLog(2, 2000)` - waits 2 seconds, then prints `2`.
+3. `await delayLog(3, 1000)` - waits 1 second, then prints `3`.
+
+The `await` ensures that each `console.log` happens only after the previous `delayLog` has resolved, so the numbers are printed sequentially in the order `1, 2, 3` despite different delays.
+
+</details>
