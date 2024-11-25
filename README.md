@@ -237,6 +237,7 @@ As a result, the numbers from 0 to 4 will be logged, each with a respective dela
 **Question 9**. Predict and Explain the Output of the below JavaScript program. ?.
 
 ```javascript
+
 for (var i = 0; i < 3; i++) {
   setTimeout(function () {
     console.log(i);
@@ -269,5 +270,53 @@ In the first `setTimeout` loop, the `var i` is used, so the `i` is shared across
 
 As a result, the loop prints `3` multiple times instead of printing `0`, `1`, `2`, and `3` as intended.
 
+
+</details>
+
+**Question 19**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+
+for (var i = 0; i < 4; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+
+setTimeout(function () {
+  console.log("Last:", i);
+}, 2000);
+
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+
+4
+4
+4
+Last: 4
+
+```
+# Explanation of Code
+
+The `for` loop runs from `i = 0` to `i = 3`, and it schedules four `setTimeout` functions with different delays:
+
+- `i = 0`: Schedules `setTimeout(function () { console.log(i); }, 0 * 1000)` → Executes after 0ms.
+- `i = 1`: Schedules `setTimeout(function () { console.log(i); }, 1 * 1000)` → Executes after 1000ms (1 second).
+- `i = 2`: Schedules `setTimeout(function () { console.log(i); }, 2 * 1000)` → Executes after 2000ms (2 seconds).
+- `i = 3`: Schedules `setTimeout(function () { console.log(i); }, 3 * 1000)` → Executes after 3000ms (3 seconds).
+
+### Important Point:
+- The loop runs immediately and quickly, scheduling the `setTimeout` functions without waiting for them to execute.
+- By the time any of the `setTimeout` functions execute, the loop has already completed, so the value of `i` will be `4` when the callbacks run.
+- The `setTimeout` functions are scheduled to run after the specified delays, but due to how JavaScript's event loop works, all the `setTimeout` callbacks will be executed after the event loop finishes processing the synchronous code (like the loop).
+- By the time these callbacks run, the value of `i` has already been incremented to `4` (because `i` was incremented four times during the loop).
+
+As a result, when the `setTimeout` callbacks execute, the value of `i` is logged as `4` for each of the scheduled functions.
+
+### Final Log:
+- All `setTimeout` callbacks will log `4` because the loop finishes executing before any of the `setTimeout` functions run, and the value of `i` is `4` at that point.
 
 </details>
