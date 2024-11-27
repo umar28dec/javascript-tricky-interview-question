@@ -151,7 +151,7 @@ printNumbersInOrder();
 2 (after 3 seconds)
 1 (after 4 seconds)
 ```
-# Explanation of Code
+## Explanation of Code
 
 In the code, `delayLog` is a function that returns a `Promise` which resolves after a specified delay, printing a message when done.
 
@@ -192,7 +192,7 @@ printNumbersInOrder();
 2 (after 3 seconds)
 1 (after 4 seconds)
 ```
-# Explanation of Code
+## Explanation of Code
 
 ### `delayLog(message, delay, callback)`
 - Takes a `message`, a `delay`, and a `callback` function.
@@ -221,7 +221,7 @@ for (let i = 0; i < 5; i++) {
 0 1 2 3 4
 
 ```
-# Explanation of Code
+## Explanation of Code
 
 In this case, the variable `i` is declared using `let`, which has **block scope**. This means that a new `i` is created for each iteration of the loop, preserving its value inside the `setTimeout` closure.
 
@@ -259,7 +259,7 @@ setTimeout(function () {
 Last: 3
 
 ```
-# Explanation of Code
+## Explanation of Code
 
 In the first `setTimeout` loop, the `var i` is used, so the `i` is shared across all the iterations. After the loop finishes, `i` is 3, and all the `setTimeout` functions will refer to the final value of `i`, which is 3.
 
@@ -272,6 +272,97 @@ As a result, the loop prints `3` multiple times instead of printing `0`, `1`, `2
 
 
 </details>
+
+**Question 10**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Success");
+  }, 1000);
+});
+
+promise
+  .then((result) => console.log(result))
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+Success
+undefined
+
+```
+## Explanation of .then() Behavior
+
+In this example, we have two `.then()` methods chained to a promise. Here's the breakdown of how each `.then()` behaves:
+
+1. **First `.then()`**: 
+    - Logs `"Success"` because the promise is resolved with that value.
+    
+2. **Second `.then()`**: 
+    - Logs `undefined` because the first `.then()` doesn't explicitly return a value. By default, `undefined` is passed to the second `.then()`.
+
+</details>
+
+**Question 15**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("Success");
+  }, 1000);
+});
+
+promise
+  .then((result) => {
+    return result;
+  })
+  .then((result) => {
+    console.log(result);
+  })
+  .then((result) => {
+    console.log("Success");
+    return result;
+  })
+  .catch((error) => console.error(error));
+
+
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+
+Success
+Success
+
+
+```
+In this example, we demonstrate the behavior of promise chaining with `.then()` and `.catch()`. Here's the breakdown of each step:
+
+1. **Promise resolves with "Success"**: 
+    - The promise is resolved with the value `"Success"`.
+
+2. **First `.then()`**: 
+    - Returns `"Success"`, passing the value to the next `.then()`.
+
+3. **Second `.then()`**: 
+    - Logs `"Success"` as the value passed from the first `.then()`.
+
+4. **Third `.then()`**: 
+    - Logs `"Success"` again and returns the same value.
+
+Since there are no errors in this chain, the `.catch()` block is not triggered.
+</details>
+
+
+
 
 **Question 19**. Predict and Explain the Output of the below JavaScript program. ?.
 
@@ -299,7 +390,7 @@ setTimeout(function () {
 Last: 4
 
 ```
-# Explanation of Code
+## Explanation of Code
 
 The `for` loop runs from `i = 0` to `i = 3`, and it schedules four `setTimeout` functions with different delays:
 
@@ -318,5 +409,55 @@ As a result, when the `setTimeout` callbacks execute, the value of `i` is logged
 
 ### Final Log:
 - All `setTimeout` callbacks will log `4` because the loop finishes executing before any of the `setTimeout` functions run, and the value of `i` is `4` at that point.
+
+</details>
+
+**Question 20**. Predict and Explain the Output of the below JavaScript program. ?.
+
+```javascript
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject("Error");
+  }, 1000);
+});
+
+promise
+  .then((result) => {
+    return result;
+  })
+  .then((result) => {
+    console.log(result);
+  })
+  .then((result) => {
+    return result;
+  })
+  .catch((error) => console.log(error))
+  .catch((error) => console.log(error));
+
+
+```
+<details><summary><b>Answer</b></summary>
+
+```javascript
+
+Error
+
+```
+## Explanation of Promise Rejection and `.catch()` Behavior
+
+In the provided code, only one `"Error"` is printed because only the first `.catch()` is executed. Here's the breakdown:
+
+1. **Promise rejection**: 
+    - The promise is rejected with the message `"Error"` after 1 second.
+
+2. **First `.then()`**: 
+    - This does not execute because the promise is rejected, so it skips to the `.catch()` block.
+
+3. **First `.catch()`**: 
+    - This catches the rejection and logs `"Error"`.
+
+4. **Second `.catch()`**: 
+    - The second `.catch()` is **not triggered** because once an error is handled by a `.catch()`, the error is considered "consumed," and the subsequent `.catch()` won't handle the same error again.
 
 </details>
